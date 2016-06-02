@@ -49,10 +49,9 @@ public class Tanque {
     
     public void loadPics(String[] names)throws Exception{
         for (int j=0;j<4;j++) {
-            String name=names[j];
+            String name=names[0];
             animaciones[j]=new Animacion();
-            for (int i = 1; i <= 4; i++) {
-                System.out.println("/assets"+name+i+".png");
+            for (int i = 1; i <= 2; i++) {
                 animaciones[j].addEscena(
                 new ImageIcon(getClass().getResource("assets/"+name+i+".png")).getImage()        
                         , 100);
@@ -60,26 +59,9 @@ public class Tanque {
         }
        
     }
-    public boolean isValid(int [][]matrix, int tam, int x, int y){
-          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0)
-          {
-              return false;
-          }
-          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==1)
-          {
-              return false;
-          }
-          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==2)
-          {
-              return false;
-          }
-          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==3){
-              return true;}
-          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==4){
-              return true;}
-          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==5){
-              return true;
-          }         
+    public boolean isValid(int [][]matrix, int tam, int x, int y){        
+          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0){
+              return true;}   
         return false;
     }
     

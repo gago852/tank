@@ -22,17 +22,17 @@ public class Ventana extends JFrame{
     public static int world[][]={
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,2,2,3,2,4,4,4,4,2,2,2,3,2,2,2,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,2,2,3,2,2,2,2,2,2,2,2,3,2,2,2,2,2,4,4,4,4,4,4,4,4,1},
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},        
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,2,2,0,2,0,0,0,2,2,2,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,2,2,0,2,2,2,2,2,2,2,2,0,2,2,2,2,2,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},        
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     };
     public Mapa mapa;
@@ -70,10 +70,10 @@ public class Ventana extends JFrame{
                }
             }
         });
-        j1=new Tanque(96,96, 2, 2);
-        String []names={"jugador","enemigo"};
+        j1=new Tanque(120,120, 5, 5);
+        String []namesplayer={"jugadorarriba","jugadorderecha","jugadorabajo","jugadorizquierda"};
         mapa=new Mapa(world,16);
-        j1.loadPics(names);
+        j1.loadPics(namesplayer);
         movieLoop=new Thread(new Runnable() {
 
             @Override
@@ -87,11 +87,13 @@ public class Ventana extends JFrame{
                 mapa.draw(g);
                 currentTime=System.currentTimeMillis()-startTime;
                         switch(j1.currentDirection){
-                            case Tanque.RIGTH:{ j1.moveRigth(currentTime,world,16); break;}
-                            case Tanque.DOWN:{j1.moveDown(currentTime,world,16); break;}
-                            case Tanque.LEFT:{ j1.moveLeft(currentTime,world,16); break;}
-                            case Tanque.UP:{j1.moveUp(currentTime,world,16); break;}
+                            case Tanque.RIGTH:{ j1.moveRigth(currentTime,world,50); break;}
+                            case Tanque.DOWN:{j1.moveDown(currentTime,world,50); break;}
+                            case Tanque.LEFT:{ j1.moveLeft(currentTime,world,50); break;}
+                            case Tanque.UP:{j1.moveUp(currentTime,world,50); break;}
                         }
+                        mapa.draw(g,w,h);
+                        mapa.draw(g);
                         j1.draw(g);
                         Thread.sleep(30);
                 c.getBufferStrategy().show();
