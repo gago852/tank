@@ -22,28 +22,25 @@ public class Mapa {
         this.world=world;
         this.tam=tam;
     }
-    
+    public void draw(Graphics g,int w,int h){
+        g.setColor(Color.BLACK);
+        g.fillRect(1,1,w,h);
+    }
     public void draw(Graphics g){
        
-        for (int i = 0; i < 10; i++) {            
-            for (int j = 0; j < 52; j++) {
-                switch(world[i][j]){
-                    case 0:{
-                        g.setColor(Color.BLACK);
-                        g.fillRect(j*tam,i*tam,tam,tam);
-                        System.out.println("blanco "+i+" "+"j");
-                        break;
-                    }
+        for (int i = 0; i < 14; i++) {            
+            for (int j = 0; j < 27; j++) {
+                switch(world[i][j]){                    
                     case 1:{
                         Image im;
                        im= new ImageIcon(getClass().getResource("assets"+"//"+"bloqueindestructible"+".png")).getImage();
-                       g.drawImage(im,j*16 ,i*16 , null);                      
+                       g.drawImage(im,j*50 ,i*50 , null);                      
                         break;
                     }                   
                       case 2:{
                         Image im;
                        im= new ImageIcon(getClass().getResource("assets"+"//"+"bloquedestruible"+".png")).getImage();
-                       g.drawImage(im,j*16 ,i*16 , null);                      
+                       g.drawImage(im,j*50 ,i*50 , null);                      
                         break;
                     }                  
                 }
