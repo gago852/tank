@@ -28,8 +28,8 @@ public class Mapa {
     }
     public void draw(Graphics g){
        
-        for (int i = 0; i < 14; i++) {            
-            for (int j = 0; j < 27; j++) {
+        for (int i = 0; i < 12; i++) {            
+            for (int j = 0; j < 17; j++) {
                 switch(world[i][j]){                    
                     case 1:{
                         Image im;

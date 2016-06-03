@@ -49,7 +49,7 @@ public class Tanque {
     
     public void loadPics(String[] names)throws Exception{
         for (int j=0;j<4;j++) {
-            String name=names[0];
+            String name=names[j];
             animaciones[j]=new Animacion();
             for (int i = 1; i <= 2; i++) {
                 animaciones[j].addEscena(
@@ -59,15 +59,25 @@ public class Tanque {
         }
        
     }
-    public boolean isValid(int [][]matrix, int tam, int x, int y){        
-          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0){
-              return true;}   
+    public boolean isValid(int [][]matrix, int tam, int x, int y,int currentDirection){  
+        if(currentDirection==Tanque.DOWN){
+          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0&&matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x+50, tam)]==0){
+              return true;}   }
+        if(currentDirection==Tanque.LEFT){
+          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0&&matrix[getMatrixPositionY(y+50, tam)][getMatrixPositionX(x, tam)]==0){
+              return true;}   }
+        if(currentDirection==Tanque.RIGTH){
+          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0&&matrix[getMatrixPositionY(y+50, tam)][getMatrixPositionX(x, tam)]==0){
+              return true;}   }
+        if(currentDirection==Tanque.UP){
+          if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0&&matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x+50, tam)]==0){
+              return true;}   }
         return false;
     }
     
     public void moveRigth(long time, int [][]matrix, int tam){
         
-        if(isValid(matrix, tam, x+vx+animaciones[currentAnimation].getImage().getWidth(null), y)){
+        if(isValid(matrix, tam, x+vx+animaciones[currentAnimation].getImage().getWidth(null), y,Tanque.RIGTH)){
             x+=vx;
             currentAnimation=Tanque.RIGTH;
             animaciones[Tanque.RIGTH].update(time);
@@ -76,7 +86,7 @@ public class Tanque {
     
     public void moveLeft(long time, int [][]matrix, int tam){
         
-        if(isValid(matrix, tam, x-vx, y)){
+        if(isValid(matrix, tam, x-vx, y,Tanque.LEFT)){
         x-=vx;
         currentAnimation=Tanque.LEFT;
         animaciones[Tanque.LEFT].update(time);
@@ -84,7 +94,7 @@ public class Tanque {
     }
     
      public void moveUp(long time, int [][]matrix,int tam){
-         if(isValid(matrix, tam, x, y-vy)){
+         if(isValid(matrix, tam, x, y-vy,Tanque.UP)){
          y-=vy;
         currentAnimation=Tanque.UP;
         animaciones[Tanque.UP].update(time);
@@ -92,7 +102,7 @@ public class Tanque {
     }
      
      public void moveDown(long time, int [][]matrix, int tam){
-        if(isValid(matrix, tam, x, y+vy+animaciones[currentAnimation].getImage().getHeight(null))){
+        if(isValid(matrix, tam, x, y+vy+animaciones[currentAnimation].getImage().getHeight(null),Tanque.DOWN)){
          
         y+=vy;
         currentAnimation=Tanque.DOWN;
