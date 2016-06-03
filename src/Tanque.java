@@ -28,7 +28,13 @@ public class Tanque {
     public int currentDirection;
     Animacion[] animaciones;
     Bala bal;
-    
+    /**
+     * constructor del tanque
+     * @param x posicon en x
+     * @param y posicion en y
+     * @param vx su velocidad en x
+     * @param vy su velocidad en y
+     */
     public Tanque(int x, int y, int vx, int vy){
         this.disparo=false;
         this.x=x;
@@ -39,15 +45,29 @@ public class Tanque {
         animaciones=new Animacion[4];
         
     }
-    
+    /**
+     * funcioon que devuelve la posicion del tanque en la matrriz de coliciones desde las x
+     * @param x posicion en x del tanque en el mapa
+     * @param tam tamaño
+     * @return entero que da la posicion en las x
+     */
     public int getMatrixPositionX(int x, int tam){
         return x/tam;
     }
-    
+    /**
+     * fincion que devuelve la posicion del tanuqe en la tarizz de colicones desde las y
+     * @param y posicion en y del tanque en el mapa
+     * @param tam tamaño
+     * @return entero que da la posiicon en la y
+     */
     public int getMatrixPositionY(int y, int tam){
         return y/tam;
     }
-    
+    /**
+     * metodo para cargar las animaciones del tanque
+     * @param names nobres de los archivos
+     * @throws Exception cuando no hay animaciones
+     */
     public void loadPics(String[] names)throws Exception{
         for (int j=0;j<4;j++) {
             String name=names[j];
@@ -60,6 +80,13 @@ public class Tanque {
         }
        
     }
+    /**
+     * metodo ahora inservible
+     * @param currentTime tienpo corrido
+     * @param world mapa
+     * @param g donde se pinta
+     * @param bala  la bala
+     */
     public synchronized void disparo(long currentTime,int [][]world,Graphics g,Bala bala)
     {
         bal=bala;
@@ -164,6 +191,15 @@ public class Tanque {
                         
     
     }
+    /**
+     * metodo para saver si esta colicionando
+     * @param matrix matrix de colivion
+     * @param tam tamaño del mapa
+     * @param x posision en x en el mapa
+     * @param y lo mismo pero en y
+     * @param currentDirection la dirreccion para donde va
+     * @return si se puede o no
+     */
     public boolean isValid(int [][]matrix, int tam, int x, int y,int currentDirection){  
         if(currentDirection==Tanque.DOWN){
           if(matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0&&matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x+50, tam)]==0){
@@ -179,7 +215,12 @@ public class Tanque {
               return true;}   }
         return false;
     }
-    
+    /**
+     * metodo para moverse a la derecha
+     * @param time tiempo
+     * @param matrix matris de colicones
+     * @param tam  tamaño
+     */
     public void moveRigth(long time, int [][]matrix, int tam){
         
         if(isValid(matrix, tam, x+vx+animaciones[currentAnimation].getImage().getWidth(null), y,Tanque.RIGTH)){
@@ -188,7 +229,12 @@ public class Tanque {
             animaciones[Tanque.RIGTH].update(time);
         }
     }
-    
+    /**
+     * metodo para moverse a la izquierda
+     * @param time tiempo
+     * @param matrix matris de colicones
+     * @param tam  tamaño
+     */
     public void moveLeft(long time, int [][]matrix, int tam){
         
         if(isValid(matrix, tam, x-vx, y,Tanque.LEFT)){
@@ -197,7 +243,12 @@ public class Tanque {
         animaciones[Tanque.LEFT].update(time);
         }
     }
-    
+    /**
+     * metodo para moverse a la arriba
+     * @param time tiempo
+     * @param matrix matris de colicones
+     * @param tam  tamaño
+     */
      public void moveUp(long time, int [][]matrix,int tam){
          if(isValid(matrix, tam, x, y-vy,Tanque.UP)){
          y-=vy;
@@ -205,7 +256,12 @@ public class Tanque {
         animaciones[Tanque.UP].update(time);
          }
     }
-     
+     /**
+      * metodo para moverse a la abajo
+      * @param time tiempo
+     * @param matrix matris de colicones
+     * @param tam  tamaño
+      */
      public void moveDown(long time, int [][]matrix, int tam){
         if(isValid(matrix, tam, x, y+vy+animaciones[currentAnimation].getImage().getHeight(null),Tanque.DOWN)){
          
@@ -214,11 +270,17 @@ public class Tanque {
         animaciones[Tanque.DOWN].update(time);
         }
     }
-     
+     /**
+      * metodo para dibujar el tanque
+      * @param g donde se dibjuka 
+      */
      public void draw(Graphics g){
          g.drawImage(animaciones[currentAnimation].getImage(),x,y,null);
      }
-
+/**
+ * esto nunca lo uso
+ * @return etc
+ */
     public int getCurrentDirection() {
         return currentDirection;
     }
