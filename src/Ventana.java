@@ -55,6 +55,10 @@ public class Ventana extends JFrame{
                    case KeyEvent.VK_DOWN:{j1.currentDirection=Tanque.DOWN; break;}
                    case KeyEvent.VK_LEFT:{j1.currentDirection=Tanque.LEFT; break;}
                    case KeyEvent.VK_RIGHT:{j1.currentDirection=Tanque.RIGTH; break;}
+                   case KeyEvent.VK_SPACE:{
+                       
+                       break;
+                   }
                }  
             }
 
@@ -70,7 +74,7 @@ public class Ventana extends JFrame{
         });
         j1=new Tanque(120,120, 5, 5);
         String []namesplayer={"jugadorarriba","jugadorderecha","jugadorabajo","jugadorizquierda"};
-        mapa=new Mapa(world,16);
+        mapa=new Mapa(world,50);
         j1.loadPics(namesplayer);
         movieLoop=new Thread(new Runnable() {
 

@@ -113,4 +113,9 @@ public class Tanque {
      public void draw(Graphics g){
          g.drawImage(animaciones[currentAnimation].getImage(),x,y,null);
      }
+
+    public int getCurrentDirection() {
+        return currentDirection;
+    }
+     
 }

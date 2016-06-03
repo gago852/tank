@@ -22,11 +22,11 @@ public class Mapa {
         this.world=world;
         this.tam=tam;
     }
-    public void draw(Graphics g,int w,int h){
+    public synchronized void draw(Graphics g,int w,int h){
         g.setColor(Color.BLACK);
         g.fillRect(1,1,w,h);
     }
-    public void draw(Graphics g){
+    public synchronized void draw(Graphics g){
        
         for (int i = 0; i < 12; i++) {            
             for (int j = 0; j < 17; j++) {

@@ -1,5 +1,6 @@
 
 import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /*
@@ -49,23 +50,21 @@ public class Bala {
     }
     
     public void loadPics(String[] names)throws Exception{
-        for (int j=0;j<4;j++) {
+               for (int j=0;j<4;j++) {
             String name=names[j];
-            animaciones[j]=new Animacion();
-            for (int i = 1; i <= 5; i++) {
-                System.out.println(path+"/assets/Sprites"+name+i+".png");
+            animaciones[j]=new Animacion();            
                 animaciones[j].addEscena(
-                new ImageIcon(getClass().getResource(path+"/assets/Sprites"+name+i+".png")).getImage()        
-                        , 100);
-            }
+                new ImageIcon(getClass().getResource("assets/"+name+".png")).getImage()        
+                        , 100);            
         }
-       
     }
-    public boolean isValid(int [][]matrix, int tam, int x, int y){
-          
-         return  matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0||matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==3;
+    public boolean isValid(int [][]matrix, int tam, int x, int y){          
+         return  matrix[getMatrixPositionY(y, tam)][getMatrixPositionX(x, tam)]==0;
     }
-    
+    public boolean isChoco(int [][]matrix, int tam, int x, int y)
+    {
+        return true;
+    }
     public void moveRigth(long time, int [][]matrix, int tam){
         
         if(isValid(matrix, tam, x+vx+animaciones[currentAnimation].getImage().getWidth(null), y)){
