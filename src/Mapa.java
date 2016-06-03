@@ -45,8 +45,8 @@ public class Mapa {
      */
     public synchronized void draw(Graphics g){
        
-        for (int i = 0; i < 12; i++) {            
-            for (int j = 0; j < 17; j++) {
+        for (int i = 0; i < 17; i++) {            
+            for (int j = 0; j < 23; j++) {
                 switch(world[i][j]){                    
                     case 1:{
                         Image im;

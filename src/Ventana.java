@@ -10,8 +10,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
 /**
@@ -21,22 +26,28 @@ import javax.swing.JFrame;
 public class Ventana extends JFrame{
     public Canvas c;
      public Thread movieLoop;
+     public Thread sonido;
      public Bala bala;
      public boolean sw=true;
      public ArrayList<Enemigo> enemigos=new ArrayList<Enemigo>();
     public static int world[][]={
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,2,0,0,2,0,0,0,2,2,2,0,0,0,0,2,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,2,0,0,2,2,2,2,2,2,2,2,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},        
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},        
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},        
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,2,0,0,2,2,2,2,0,0,2,0,0,2,2,0,0,2,0,0,1},
+        {1,0,0,2,0,0,2,0,0,2,0,0,2,0,0,2,2,0,0,2,0,0,1},
+        {1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,1},
+        {1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,1},
+        {1,0,0,2,2,2,2,0,0,2,2,2,2,0,0,0,0,0,0,2,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,2,0,0,1},        
+        {1,0,0,2,2,2,2,0,0,2,2,2,2,2,2,2,2,0,0,2,0,0,1},        
+        {1,0,0,2,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,2,0,0,1},        
+        {1,0,0,2,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,1},        
+        {1,0,0,2,0,0,2,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,1},        
+        {1,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,1},        
+        {1,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     };
     public Mapa mapa;
     public Tanque j1;
@@ -45,6 +56,19 @@ public class Ventana extends JFrame{
     public Thread enemigoss;
     public Ventana(int w,int h)throws Exception
     {
+        sonido=new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                
+               Sonido son=new Sonido();
+                try {
+                    son.cargarsonido();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                } 
+            }
+        });
         c= new Canvas();
         this.setSize(w, h);
         c.setSize(w, h);
@@ -138,11 +162,11 @@ public class Ventana extends JFrame{
                              }
                          }
                      });
-                        if (sw) {
+                      /*  if (sw) {
                          enemigoss.start();
                          sw=false;
                      }else{
-                        en.draw(g);}
+                        en.draw(g);}*/
                         j1.draw(g);
                         Thread.sleep(30);
                 c.getBufferStrategy().show();
@@ -157,9 +181,10 @@ public class Ventana extends JFrame{
     }
     public static void main(String[] args) throws Exception {
         try{
-        Ventana p=new Ventana(870,650);
+        Ventana p=new Ventana(1220,950);
         p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             p.setVisible(true);
+            p.sonido.start();
             p.movieLoop.start();
         }catch(Exception e)
         {
