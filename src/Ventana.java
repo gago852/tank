@@ -97,10 +97,11 @@ public class Ventana extends JFrame{
                    case KeyEvent.VK_DOWN:{j1.currentDirection=Tanque.NONE; break;}
                    case KeyEvent.VK_LEFT:{j1.currentDirection=Tanque.NONE; break;}
                    case KeyEvent.VK_RIGHT:{j1.currentDirection=Tanque.NONE; break;}
+                   case KeyEvent.VK_SPACE:{j1.disparo=false;break;}
                }
             }
         });
-        j1=new Tanque(120,120, 5, 5);
+        j1=new Tanque(90,90, 5, 5);
         String []namesplayer={"jugadorarriba","jugadorderecha","jugadorabajo","jugadorizquierda"};
         mapa=new Mapa(world,50);
         j1.loadPics(namesplayer);

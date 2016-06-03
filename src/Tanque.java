@@ -114,7 +114,7 @@ public class Tanque {
                            }
                            }
                        }
-                   });
+                   });balio.start();
                            break;}
                             case Tanque.DOWN:{                                
                                bala=new Bala(x, y+50, 8, 8);
@@ -136,7 +136,7 @@ public class Tanque {
                                            }
                                        }                                                
                                     }
-                                });  
+                                });  balio.start();
                                 break;}
                             case Tanque.LEFT:{
                                 bala=new Bala(x-50, y, 8, 8);
@@ -158,7 +158,7 @@ public class Tanque {
                                            }
                                        }                                                
                                     }
-                                });  
+                                });  balio.start();
                                 break;}
                             case Tanque.UP:{
                                 bala=new Bala(x, y-50, 8, 8);
@@ -180,8 +180,9 @@ public class Tanque {
                                            }
                                        }                                                
                                     }
-                                });  
+                                });  balio.start();
                                 break;}
+                            
         }
         }catch(Exception e)
         {
