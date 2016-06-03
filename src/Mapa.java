@@ -17,15 +17,32 @@ import javax.swing.ImageIcon;
 public class Mapa {
      public int world[][];
     public int tam;
-    
+    /**
+     * constructor del mapa
+     * @param world ubicaciones de cada cosa en el mapa
+     * @param tam el tamaño de cada parte
+     * @since vercion 1.0
+     */
     public Mapa(int [][]world,int tam){
         this.world=world;
         this.tam=tam;
     }
+    /**
+     * dibuja el fondo
+     * @param g donde se dibuja
+     * @param w alto(creo)
+     * @param h ancho (creo)
+     * @since vercion 1.0
+     */
     public synchronized void draw(Graphics g,int w,int h){
         g.setColor(Color.BLACK);
         g.fillRect(1,1,w,h);
     }
+    /**
+     * donde se dibuja todo los elementos del mapa
+     * @param g donde se dibuja
+     * @since version 1.0
+     */
     public synchronized void draw(Graphics g){
        
         for (int i = 0; i < 12; i++) {            

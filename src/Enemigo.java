@@ -8,6 +8,10 @@
  *
  * @author gago8
  */
-public class Enemigo {
+public class Enemigo extends Tanque{
+
+    public Enemigo(int x, int y, int vx, int vy) {
+        super(x, y, vx, vy);
+    }
     
 }

@@ -23,13 +23,14 @@ public class Tanque {
     public int y;
     public int vx;
     public int vy;
-    
+    public boolean disparo;
     public int currentAnimation;
     public int currentDirection;
     Animacion[] animaciones;
+    Bala bal;
     
     public Tanque(int x, int y, int vx, int vy){
-        
+        this.disparo=false;
         this.x=x;
         this.y=y;
         this.vx=vx;
@@ -58,6 +59,110 @@ public class Tanque {
             }
         }
        
+    }
+    public synchronized void disparo(long currentTime,int [][]world,Graphics g,Bala bala)
+    {
+        bal=bala;
+        Thread balio ;
+        disparo=false;
+        try{
+        switch(currentDirection){
+                 case Tanque.RIGTH:{ 
+                              
+                   bala=new Bala(x+50, y, 8, 8);
+                String []namesbala={"balaarriba","baladerecha","balaabajo","balaizquierda"};
+                           bala.loadPics(namesbala);
+                            bala.currentDirection=Tanque.RIGTH;
+                           balio=new Thread(new Runnable() {
+
+                       @Override
+                       public void run() {
+                           while(bal.estaActiva){try{
+                          bal.moveRigth(currentTime, world, 50);
+                                           bal.draw(g);
+                           Thread.sleep(30);
+                           }catch(Exception e)
+                           {
+                               e.printStackTrace();
+                           }
+                           }
+                       }
+                   });
+                           break;}
+                            case Tanque.DOWN:{                                
+                               bala=new Bala(x, y+50, 8, 8);
+                            String []namesbala={"balaarriba","baladerecha","balaabajo","balaizquierda"};
+                            bala.loadPics(namesbala);
+                            bala.currentDirection=Tanque.DOWN;
+                            balio=new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                       while(bal.estaActiva)
+                                       {
+                                           try{
+                                           bal.moveDown(currentTime, world, 50);
+                                           bal.draw(g);
+                                           Thread.sleep(30);
+                                           }catch(Exception e)
+                                           {
+                                               e.printStackTrace();
+                                           }
+                                       }                                                
+                                    }
+                                });  
+                                break;}
+                            case Tanque.LEFT:{
+                                bala=new Bala(x-50, y, 8, 8);
+                            String []namesbala={"balaarriba","baladerecha","balaabajo","balaizquierda"};
+                            bala.loadPics(namesbala);
+                            bala.currentDirection=Tanque.LEFT;
+                            balio=new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                       while(bal.estaActiva)
+                                       {
+                                           try{
+                                           bal.moveLeft(currentTime, world, 50);
+                                           bal.draw(g);
+                                           Thread.sleep(30);
+                                           }catch(Exception e)
+                                           {
+                                               e.printStackTrace();
+                                           }
+                                       }                                                
+                                    }
+                                });  
+                                break;}
+                            case Tanque.UP:{
+                                bala=new Bala(x, y-50, 8, 8);
+                            String []namesbala={"balaarriba","baladerecha","balaabajo","balaizquierda"};
+                            bala.loadPics(namesbala);
+                            bala.currentDirection=Tanque.UP;
+                            balio=new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                       while(bal.estaActiva)
+                                       {
+                                           try{
+                                           bal.moveUp(currentTime, world, 50);
+                                           bal.draw(g);
+                                           Thread.sleep(30);
+                                           }catch(Exception e)
+                                           {
+                                               e.printStackTrace();
+                                           }
+                                       }                                                
+                                    }
+                                });  
+                                break;}
+        }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }              
+                            
+                        
+    
     }
     public boolean isValid(int [][]matrix, int tam, int x, int y,int currentDirection){  
         if(currentDirection==Tanque.DOWN){

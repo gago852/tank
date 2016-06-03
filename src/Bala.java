@@ -30,13 +30,14 @@ public class Bala {
     Animacion[] animaciones;
     public boolean estaActiva;
     
-    public Bala(int x, int y, int vx, int vy, String path){
+    public Bala(int x, int y, int vx, int vy){
         this.path=path;
         this.x=x;
         this.y=y;
         this.vx=vx;
         this.vy=vy;
         this.currentDirection=-1;
+        this.estaActiva=true;        
         animaciones=new Animacion[4];
         
     }
@@ -71,6 +72,9 @@ public class Bala {
             x+=vx;
             currentAnimation=Bala.RIGTH;
             
+        }else
+        {
+            estaActiva=false;
         }
     }
     
